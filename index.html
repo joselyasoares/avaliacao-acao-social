@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliação Ação Social 30/11</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #34d399 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #34d399;
+        }
+
+        .header h1 {
+            color: #10b981;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #6b7280;
+            font-size: 1.1em;
+        }
+
+        .anonimo-badge {
+            display: inline-block;
+            background: #10b981;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-top: 15px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            color: #10b981;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #d1fae5;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            color: #374151;
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+
+        .required {
+            color: #ef4444;
+        }
+
+        input[type="text"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: all 0.3s;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        .rating-group {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f9fafb;
+            border-radius: 10px;
+            border-left: 4px solid #10b981;
+        }
+
+        .rating-label {
+            color: #374151;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .rating-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .rating-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #10b981;
+            min-width: 50px;
+        }
+
+        input[type="range"] {
+            flex: 1;
+            min-width: 200px;
+            height: 8px;
+            border-radius: 5px;
+            background: #d1d5db;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #10b981;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #10b981;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .scale-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85em;
+            color: #6b7280;
+            margin-top: 5px;
+        }
+
+        .radio-group,
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .radio-option,
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            background: #f9fafb;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .radio-option:hover,
+        .checkbox-option:hover {
+            background: #d1fae5;
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: #10b981;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .submit-btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .message {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .message.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 2px solid #10b981;
+        }
+
+        .message.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 2px solid #ef4444;
+        }
+
+        .message.loading {
+            background: #dbeafe;
+            color: #1e40af;
+            border: 2px solid #3b82f6;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 1.6em;
+            }
+
+            .rating-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            input[type="range"] {
+                width: 100%;
+            }
+        }
+
+        iframe {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Avaliação Ação Social</h1>
+            <p>30 de Novembro de 2025</p>
+            <span class="anonimo-badge">🔒 Avaliação 100% Anônima</span>
+        </div>
+
+        <div id="mensagem" class="message"></div>
+
+        <form id="formulario" method="POST" action="https://script.google.com/macros/s/AKfycbwq-L3yMjwSSZm76BsK-IDkY7yvADFa6r7o71MvaqHotYd5plFOH3I_dAWVMDmjmUI0lg/exec" target="hidden_iframe">
+            
+            <!-- BLOCO 1: CONTEXTO -->
+            <div class="section">
+                <h2 class="section-title">📋 Contexto</h2>
+                
+                <div class="form-group">
+                    <label>Em qual setor você atuou? <span class="required">*</span></label>
+                    <select name="setorAtuou" required>
+                        <option value="">Selecione...</option>
+                        <option value="Distribuição de senhas">Distribuição de senhas</option>
+                        <option value="Organização da fila de cadastro">Organização da fila de cadastro</option>
+                        <option value="Recepção e Cadastro">Recepção e Cadastro</option>
+                        <option value="Triagem">Triagem</option>
+                        <option value="Posso ajudar/Apoio">Posso ajudar/Apoio</option>
+                        <option value="Cozinha">Cozinha</option>
+                        <option value="Ordem e limpeza">Ordem e limpeza</option>
+                        <option value="Infraestrutura">Infraestrutura</option>
+                        <option value="Almoxarifado">Almoxarifado</option>
+                        <option value="Cobertura de marketing">Cobertura de marketing</option>
+                        <option value="Divulgação prévia">Divulgação prévia</option>
+                        <option value="Serviços ofertados">Serviços ofertados</option>
+                        <option value="Coordenações e Líderes de setores">Coordenações e Líderes de setores</option>
+                        <option value="Culto e sorteio de cestas">Culto e sorteio de cestas</option>
+                        <option value="Logística e transporte">Logística e transporte</option>
+                        <option value="Coordenação Geral">Coordenação Geral</option>
+                        <option value="Outros">Outros</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Foi sua primeira vez como voluntário? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="primeiraVez" value="Sim" required>
+                            <span>Sim, primeira vez</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="primeiraVez" value="Não">
+                            <span>Não, já participei antes</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BLOCO 2: AVALIAÇÃO POR SETORES -->
+            <div class="section">
+                <h2 class="section-title">⭐ Avaliação por Setores</h2>
+                <p style="color: #6b7280; margin-bottom: 25px;">Avalie de 0 a 10 cada setor (0 = Péssimo, 10 = Excelente)</p>
+
+                <div class="rating-group">
+                    <span class="rating-label">1. Distribuição de senhas</span>
+                    <div class="rating-container">
+                        <span class="rating-value" id="valor-setor1">5</span>
+                        <input type="range" name="avalSetor1" min="0" max="10" value="5" oninput="document.getElementById('valor-setor1').textContent = this.value">
+                    </div>
+                    <div class="scale-labels">
+                        <span>0 - Péssimo</span>
+                        <span>10 - Excelente</span>
+                    </div>
+                </div>
+
+                <div class="rating-group">
+                    <span class="rating-label">2. Organização da fila de cadastro</span>
+                    <div class="rating-container">
+                        <span class="rating-value" id="valor-setor2">5</span>
+                        <input type="range" name="avalSetor2" min="0" max="10" value="5" oninput="document.getElementById('valor-setor2').textContent = this.value">
+                    </div>
+                    <div class="scale-labels">
+                        <span>0 - Péssimo</span>
+                        <span>10 - Excelente</span>
+                    </div>
+                </div>
+
+                <div class="rating-group">
+                    <span class="rating-label">3. Recepção e Cadastro</span>
+                    <div class="rating-container">
+                        <span class="rating-value" id="valor-setor3">5</span>
+                        <input type="range" name="avalSetor3" min="0" max="10" value="5" oninput="document.getElementById('valor-setor3').textContent = this.value">
+                    </div>
+                    <div class="scale-labels">
+                        <span>0 - Péssimo</span>
+                        <span>10 - Excelente</span>
+                    </div>
+                </div>
+
+                <div class="rating-group">
+                    <span class="rating-label">4. Triagem</span>
+                    <div class="rating-container">
+                        <span class="rating-value" id="valor-setor4">5</span>
+                        <input type="range" name="avalSetor4" min="0" max="10" value="5" oninput="document.getElementById('valor-setor4').textContent = this.value">
+                    </div>
+                    <div class="scale-labels">
+                        <span>0 - Péssimo</span>
+                        <span>10 - Excelente</span>
+                    </div>
+                </div>
+
+                <div class="rating-group">
+                    <span class="rating-label">5. Posso ajudar/Apoio</span>
+                    <div class="rating-container">
+                        <span class="rating-value" id="valor-setor5">5</span>
+                        <input type="range" name="avalSetor5" min="0" max="10" value="5" oninput="document.getElementById('valor-setor5').textContent = this.value">
+                    </div>
+                    <div class="scale-labels">
+                        <span>0 - Péssimo</span>
+                        <span>10 - Excelente</span>
+                    </div>
+                </div>
+
+                <div class="rating-group">
+                    <span class="rating-label">6. Cozinha</span>
+                    <div class="rating-container">
+                        <span class="rating-value" id="valor-setor6">5</span>
+                        <input type="range" name="avalSetor6" min="0" max="10" value="5" oninput="document.getElementById('valor-setor6').textContent = this.value">
+                    </div>
+                    <div class="scale-labels">
+                        <span>0 - Péssimo</span>
+                        <span>10 - Excelente</span>
+                    </div>
+                </div>
+
+                <div class="rating-group">
+                    <span class="rating-label">7. Ordem e limpeza</span>
+                    <div class="rating-container">
+                        <span class="rating-value" id="valor-setor7">5</span>
+                        <input type="range" name="avalSetor7" min="0" max="10" value="5" oninput="document.getElementById('valor-setor7').textContent = this.value">
+                    </div>
+                    <div class="scale-labels">
+                        <span>0 - Péssimo</span>
+                        <span>10 - Excelente</span>
+                    </div>
+                </div>
+
+                <div class="rating-group">
+                    <span class="rating-label">8. Infraestrutura</span>
+                    <div class="rating-container">
+                        <span class="rating-value" id="valor-setor8">5</span>
+                        <input type="range" name="avalSetor8" min="0" max="10" value="5" oninput="document.getElementById('valor-setor8').textContent = this.value">
+                    </div>
+                    <div class="scale-labels">
+                        <span>0 - Péssimo</span>
+                        <span>10 - Excelente</span>
+                    </div>
+                </div>
+
+                <div class="rating-group">
+                    <span class="rating-label">9. Almoxarifado</span>
+                    <div class="rating-container">
+                        <span class="rating-value" id="valor-setor9">5</span>
+                        <input type="range" name="avalSetor9" min="0" max="10" value="5" oninput="document.getElementById('valor-setor9').textContent = this.value">
+                    </div>
+                    <div class="scale-labels">
+                        <span>0 - Péssimo</span>
+                        <span>10 - Excelente</span>
+                    </div>
+                </div>
+
+                <div class="rating-group">
+                    <span class="rating-label">10. Cobertura de marketing</span>
+                    <div class="rating-container">
+                        <span class="rating-value" id="valor-setor10">5</span>
+                        <input type="range" name="avalSetor10" min="0" max="10" value="5" oninput="document.getElementById('valor-setor10').textContent = this.value">
+                    </div>
+                    <div class="scale-labels">
+                        <span>0 - Péssimo</span>
+                        <span>10 - Excelente</span>
+                    </div>
+                </div>
+
+                <div class="rating-group">
+                    <span class="rating-label">11. Divulgação prévia</span>
+                    <div class="rating-container">
+                        <span class="rating-value" id="valor-setor11">5</span>
+                        <input type="range" name="avalSetor11" min="0" max="10" value="5" oninput="document.getElementById('valor-setor11').textContent = this.value">
+                    </div>
+                    <div class="scale-labels">
+                        <span>0 - Péssimo</span>
+                        <span>10 - Excelente</span>
+                    </div>
+                </div>
+
+                <div class="rating-group">
+                    <span class="rating-label">12. Serviços ofertados</span>
+                    <div class="rating-container">
+                        <span class="rating-value" id="valor-setor12">5</span>
+                        <input type="range" name="avalSetor12" min="0" max="10" value="5" oninput="document.getElementById('valor-setor12').textContent = this.value">
+                    </div>
+                    <div class="scale-labels">
+                        <span>0 - Péssimo</span>
+                        <span>10 - Excelente</span>
+                    </div>
+                </div>
+
+                <div class="rating-group">
+                    <span class="rating-label">13. Coordenações e Líderes de setores</span>
+                    <div class="rating-container">
+                        <span class="rating-value" id="valor-setor13">5</span>
+                        <input type="range" name="avalSetor13" min="0" max="10" value="5" oninput="document.getElementById('valor-setor13').textContent = this.value">
+                    </div>
+                    <div class="scale-labels">
+                        <span>0 - Péssimo</span>
+                        <span>10 - Excelente</span>
+                    </div>
+                </div>
+
+                <div class="rating-group">
+                    <span class="rating-label">14. Culto e sorteio de cestas</span>
+                    <div class="rating-container">
+                        <span class="rating-value" id="valor-setor14">5</span>
+                        <input type="range" name="avalSetor14" min="0" max="10" value="5" oninput="document.getElementById('valor-setor14').textContent = this.value">
+                    </div>
+                    <div class="scale-labels">
+                        <span>0 - Péssimo</span>
+                        <span>10 - Excelente</span>
+                    </div>
+                </div>
+
+                <div class="rating-group">
+                    <span class="rating-label">15. Logística e transporte</span>
+                    <div class="rating-container">
+                        <span class="rating-value" id="valor-setor15">5</span>
+                        <input type="range" name="avalSetor15" min="0" max="10" value="5" oninput="document.getElementById('valor-setor15').textContent = this.value">
+                    </div>
+                    <div class="scale-labels">
+                        <span>0 - Péssimo</span>
+                        <span>10 - Excelente</span>
+                    </div>
+                </div>
+
+                <div class="rating-group">
+                    <span class="rating-label">16. Coordenação Geral</span>
+                    <div class="rating-container">
+                        <span class="rating-value" id="valor-setor16">5</span>
+                        <input type="range" name="avalSetor16" min="0" max="10" value="5" oninput="document.getElementById('valor-setor16').textContent = this.value">
+                    </div>
+                    <div class="scale-labels">
+                        <span>0 - Péssimo</span>
+                        <span>10 - Excelente</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BLOCO 3: AVALIAÇÃO GERAL -->
+            <div class="section">
+                <h2 class="section-title">🎯 Avaliação Geral</h2>
+
+                <div class="rating-group">
+                    <span class="rating-label">Organização geral do evento</span>
+                    <div class="rating-container">
+                        <span class="rating-value" id="valor-orgGeral">5</span>
+                        <input type="range" name="orgGeral" min="0" max="10" value="5" oninput="document.getElementById('valor-orgGeral').textContent = this.value">
+                    </div>
+                    <div class="scale-labels">
+                        <span>0 - Péssimo</span>
+                        <span>10 - Excelente</span>
+                    </div>
+                </div>
+
+                <div class="rating-group">
+                    <span class="rating-label">Comunicação entre setores</span>
+                    <div class="rating-container">
+                        <span class="rating-value" id="valor-comunicacao">5</span>
+                        <input type="range" name="comunicacao" min="0" max="10" value="5" oninput="document.getElementById('valor-comunicacao').textContent = this.value">
+                    </div>
+                    <div class="scale-labels">
+                        <span>0 - Péssimo</span>
+                        <span>10 - Excelente</span>
+                    </div>
+                </div>
+
+                <div class="rating-group">
+                    <span class="rating-label">Clareza das orientações recebidas</span>
+                    <div class="rating-container">
+                        <span class="rating-value" id="valor-orientacoes">5</span>
+                        <input type="range" name="orientacoes" min="0" max="10" value="5" oninput="document.getElementById('valor-orientacoes').textContent = this.value">
+                    </div>
+                    <div class="scale-labels">
+                        <span>0 - Péssimo</span>
+                        <span>10 - Excelente</span>
+                    </div>
+                </div>
+
+                <div class="rating-group">
+                    <span class="rating-label">Pontualidade no início/término</span>
+                    <div class="rating-container">
+                        <span class="rating-value" id="valor-pontualidade">5</span>
+                        <input type="range" name="pontualidade" min="0" max="10" value="5" oninput="document.getElementById('valor-pontualidade').textContent = this.value">
+                    </div>
+                    <div class="scale-labels">
+                        <span>0 - Péssimo</span>
+                        <span>10 - Excelente</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BLOCO 4: PREPARAÇÃO E RECURSOS -->
+            <div class="section">
+                <h2 class="section-title">🛠️ Preparação e Recursos</h2>
+
+                <div class="form-group">
+                    <label>Você se sentiu preparado para sua função? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="preparado" value="Sim" required>
+                            <span>Sim, totalmente preparado</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="preparado" value="Parcialmente">
+                            <span>Parcialmente preparado</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="preparado" value="Não">
+                            <span>Não, senti falta de preparo</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Recebeu treinamento/briefing adequado? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="treinamento" value="Sim" required>
+                            <span>Sim, muito adequado</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="treinamento" value="Parcialmente">
+                            <span>Parcialmente adequado</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="treinamento" value="Não">
+                            <span>Não recebi ou foi inadequado</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Teve todos os materiais/equipamentos necessários? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="materiais" value="Sim" required>
+                            <span>Sim, tudo que precisava</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="materiais" value="Parcialmente">
+                            <span>Parcialmente, faltou algo</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="materiais" value="Não">
+                            <span>Não, faltaram materiais importantes</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Sentiu falta de algum recurso? (Opcional)</label>
+                    <textarea name="faltaRecurso" placeholder="Ex: Mais cadeiras, melhor comunicação por rádio, mais voluntários no setor..."></textarea>
+                </div>
+            </div>
+
+            <!-- BLOCO 5: EXPERIÊNCIA PESSOAL -->
+            <div class="section">
+                <h2 class="section-title">💚 Experiência Pessoal</h2>
+
+                <div class="form-group">
+                    <label>Como foi sua experiência geral? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="experiencia" value="Excelente" required>
+                            <span>😄 Excelente</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="experiencia" value="Boa">
+                            <span>🙂 Boa</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="experiencia" value="Regular">
+                            <span>😐 Regular</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="experiencia" value="Ruim">
+                            <span>🙁 Ruim</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="experiencia" value="Muito Ruim">
+                            <span>😞 Muito Ruim</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Voltaria a participar de outra ação? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="voltaria" value="Sim" required>
+                            <span>✅ Sim, com certeza!</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="voltaria" value="Talvez">
+                            <span>🤔 Talvez, depende</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="voltaria" value="Não">
+                            <span>❌ Não voltaria</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Indicaria para outros voluntários? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="indicaria" value="Sim" required>
+                            <span>👍 Sim, indicaria</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="indicaria" value="Talvez">
+                            <span>🤷 Talvez</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="indicaria" value="Não">
+                            <span>👎 Não indicaria</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>O que mais te marcou positivamente? (Opcional)</label>
+                    <textarea name="marcouPositivo" placeholder="Conte o que você mais gostou na ação social..."></textarea>
+                </div>
+            </div>
+
+            <!-- BLOCO 6: FEEDBACKS ABERTOS -->
+            <div class="section">
+                <h2 class="section-title">💬 Feedbacks e Sugestões</h2>
+                <p style="color: #6b7280; margin-bottom: 25px;">Todos os campos abaixo são opcionais, mas suas respostas são valiosas!</p>
+
+                <div class="form-group">
+                    <label>✅ O que funcionou MUITO BEM?</label>
+                    <textarea name="funcionouBem" placeholder="Destaque os pontos fortes da ação..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>⚠️ O que precisa MELHORAR urgentemente?</label>
+                    <textarea name="melhorar" placeholder="Seja sincero, queremos melhorar!"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>💡 Sugestões para a próxima edição</label>
+                    <textarea name="sugestoes" placeholder="Suas ideias são importantes! O que podemos fazer diferente?"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>👏 Elogios (pessoas, setores, momentos)</label>
+                    <textarea name="elogios" placeholder="Reconheça o trabalho de alguém ou algum setor..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>🔧 Críticas construtivas</label>
+                    <textarea name="criticas" placeholder="Críticas que ajudem a crescer..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>💬 Observações gerais</label>
+                    <textarea name="observacoes" placeholder="Algo mais que gostaria de compartilhar?"></textarea>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Enviar Avaliação 📊</button>
+        </form>
+    </div>
+
+    <iframe name="hidden_iframe" id="hidden_iframe"></iframe>
+
+    <script>
+        // Mostrar mensagem de sucesso após envio
+        document.getElementById('formulario').addEventListener('submit', function(e) {
+            const mensagem = document.getElementById('mensagem');
+            const botao = document.querySelector('.submit-btn');
+            
+            // Mostrar loading
+            mensagem.className = 'message loading';
+            mensagem.style.display = 'block';
+            mensagem.textContent = '⏳ Enviando sua avaliação...';
+            botao.disabled = true;
+
+            // Após 2 segundos, mostrar sucesso
+            setTimeout(function() {
+                mensagem.className = 'message success';
+                mensagem.textContent = '✅ Avaliação enviada com sucesso! Obrigado pela sua contribuição! 💚';
+                
+                // Limpar formulário
+                document.getElementById('formulario').reset();
+                
+                // Reset dos valores dos sliders
+                for(let i = 1; i <= 16; i++) {
+                    document.getElementById('valor-setor' + i).textContent = '5';
+                }
+                document.getElementById('valor-orgGeral').textContent = '5';
+                document.getElementById('valor-comunicacao').textContent = '5';
+                document.getElementById('valor-orientacoes').textContent = '5';
+                document.getElementById('valor-pontualidade').textContent = '5';
+                
+                botao.disabled = false;
+                
+                // Scroll para o topo
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
